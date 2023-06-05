@@ -1,0 +1,24 @@
+{
+  "name": "deinbett-coding-challenge",
+  "version": "1.0.0",
+  "description": "Coding challenge for Krieger Digital",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romanhmln/deinbett-coding-challenge.git"
+  },
+  "author": "Roman Hamolin",
+  "license": "ISC",
+  "homepage": "https://github.com/romanhmln/deinbett-coding-challenge#readme",
+  "devDependencies": {
+    "cypress": "^11.0.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}

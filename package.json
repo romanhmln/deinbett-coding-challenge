@@ -20,6 +20,6 @@
     "cypress-mailosaur": "^2.13.0"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": false
   }
 }

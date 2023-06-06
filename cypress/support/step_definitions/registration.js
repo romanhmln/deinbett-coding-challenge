@@ -1,5 +1,5 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import { acceptCookies, destroyRequestThatBlocksLoadEvent, stringGen } from "../../support/helpers";
+import { acceptCookies, destroyRequestThatBlocksLoadEvent, stringGen } from "../helpers";
 import listingPage from "../../pages/listingPage";
 const loginPage = require("../../pages/loginPage");
 const registrationPage = require("../../pages/registrationPage");

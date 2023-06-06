@@ -8,25 +8,31 @@ class loginPage {
         loginButton: () => cy.get('#login-submit'),
     }
 
+    visit() {
+        cy.visit('/login')
+        cy.url().should('contain', '/login')
+    }
+
     navigateToRegistrationPage() {
-        return this.elements.registrationButton().click();
+        this.elements.registrationButton().click();
+        cy.url().should("contain", '/registrierung')
     }
 
     fillTheLoginEmailField(email) {
-        return this.elements.userEmailField().type(email);
+        this.elements.userEmailField().type(email);
     }
 
     fillTheLoginPasswordField(password) {
-        return this.elements.userPwField().type(password);
+        this.elements.userPwField().type(password);
     }
 
     clickForgotPasswordLink() {
-        return this.elements.forgotPasswordLink().click();
+        this.elements.forgotPasswordLink().click();
     }
 
     clickLoginButton() {
-        return this.elements.loginButton().click()
-    }   
+        this.elements.loginButton().click({force: true})
+    }
 
 }
 

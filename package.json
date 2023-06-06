@@ -16,7 +16,8 @@
   "homepage": "https://github.com/romanhmln/deinbett-coding-challenge#readme",
   "devDependencies": {
     "cypress": "^11.0.0",
-    "cypress-cucumber-preprocessor": "^4.3.1"
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-mailosaur": "^2.13.0"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true

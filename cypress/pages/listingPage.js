@@ -3,13 +3,13 @@ class listingPage {
     elements ={
         searchBar: () => cy.get('#searchFieldInputId'),
         loginButton: () => cy.get('.headerElement--login'),
+        myAccountPage: () => cy.get("a[href='/kundenkonto']"),
         wishListButton: () => cy.get('.headerElement__link--wishlist'),
         cartButton: () => cy.get('.headerElement__element--cart'),
     }
 
     visit(){
         cy.visit("/")
-        
     }
 
     search(data) {
@@ -18,6 +18,11 @@ class listingPage {
     
     openLoginPage() {
         this.elements.loginButton().click()
+    }
+
+    openAccountPage() {
+        this.elements.myAccountPage().click()
+        cy.url().should('contain', '/kundenkonto')
     }
 
     openWishList() {

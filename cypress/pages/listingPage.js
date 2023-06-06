@@ -3,7 +3,7 @@ class listingPage {
     elements ={
         searchBar: () => cy.get('#searchFieldInputId'),
         loginButton: () => cy.get('.headerElement--login'),
-        myAccountPage: () => cy.get("a[href='/kundenkonto']"),
+        myAccountPage: () => cy.get(".headerElement a[href='/kundenkonto']"),
         wishListButton: () => cy.get('.headerElement__link--wishlist'),
         cartButton: () => cy.get('.headerElement__element--cart'),
     }

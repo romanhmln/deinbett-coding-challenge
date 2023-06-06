@@ -1,21 +1,26 @@
+import { stringGen } from "../helpers";
+
 class User {
 
-    variables = {
-        email: String,
-        newPassword: String,
-        oldPassword: String
+    name = stringGen(10, 'name');
+    email = `${stringGen(8, 'name').toLowerCase()}@${Cypress.env('subdomain')}`;
+    newPassword = stringGen(10, 'password');
+    oldPassword = stringGen(10, 'password');
+
+    getName(){
+        return this.name;
     }
 
-    setEmail(email) {
-        this.email = email;
+    getOldPassword() {
+        return this.oldPassword
     }
 
-    setNewPassword(newPassword) {
-        this.newPassword = newPassword;
+    getNewPassword() {
+        return this.newPassword
     }
 
-    setOldPassword(oldPassword) {
-        this.oldPassword = oldPassword;
+    getEmail() {
+        return this.email
     }
 }
 

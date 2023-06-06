@@ -6,6 +6,10 @@ class loginPage {
         userPwField: () => cy.get('#loginPassword'),
         forgotPasswordLink: () => cy.get('.existingAccount__forgotten'),
         loginButton: () => cy.get('#login-submit'),
+
+        errorOnLogin: () => cy.get("[title='loginEmail'].input--error"),
+        errorOnPw: () => cy.get("[title='loginPassword'].input--error"),
+        labelError: () => cy.get("#loginEmail-error"),
     }
 
     visit() {

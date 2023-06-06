@@ -4,14 +4,10 @@ import listingPage from "../../pages/listingPage";
 const loginPage = require("../../pages/loginPage");
 const registrationPage = require("../../pages/registrationPage");
 const forgotPwPage = require("../../pages/forgotPasswordPage");
-
+const user = require('../containers/user.container')
 const serverId = Cypress.env('serverId')
 
-let randomName = stringGen(10, 'name')
-let randomPw = stringGen(10, 'password')
-let randomPwNew = stringGen(10, 'password')
-let email = `${stringGen(8, 'name').toLowerCase()}@${Cypress.env('subdomain')}`
-let forgotPwLink = null;
+let forgotPwLink = null
 
 Given("user is on the Login page", () => {
     loginPage.visit()
@@ -27,23 +23,23 @@ And('chooses the {string} salutation', salutation => {
 })
 
 And('fills the Firstname field with random value', () => {
-    registrationPage.fillTheFirstNameField(randomName)
+    registrationPage.fillTheFirstNameField(user.getName())
 })
 
 And('fills the Lastname field with random value', () => {
-    registrationPage.fillTheLastNameField(randomName)
+    registrationPage.fillTheLastNameField(user.getName())
 })
 
 And('fills the Email field with random value', () => {
-    registrationPage.fillTheEmailField(email)
+    registrationPage.fillTheEmailField(user.getEmail())
 })
 
 And('fills the Password field with random value', () => {
-    registrationPage.fillThePasswordField(randomPw)
+    registrationPage.fillThePasswordField(user.getOldPassword())
 })
 
 And('fills the Confirm password field with random value', () => {
-    registrationPage.fillTheConfirmPasswordField(randomPw)
+    registrationPage.fillTheConfirmPasswordField(user.getOldPassword())
 })
 
 And('checks the AGB checkbox', () => {
@@ -69,7 +65,7 @@ And('user clicks on Forgot password link', () => {
 })
 
 When('user fills in Email field', () => {
-    forgotPwPage.fillInTheEmailField(email)
+    forgotPwPage.fillInTheEmailField(user.getEmail())
 })
 
 And('user click Submit button', () => {
@@ -79,7 +75,7 @@ And('user click Submit button', () => {
 And('user retrieves the Email', () => {
     cy.wait(60000)
     cy.mailosaurGetMessage(serverId, {
-        sentTo: email
+        sentTo: user.getEmail()
     }).then(email => {
         expect(email.subject).to.equal('Passwort zurücksetzen');
         forgotPwLink = email.html.links[4].href;
@@ -92,7 +88,7 @@ And('user clicks on the link in the email', () => {
 })
 
 And('user fills in New password and Confirm password fields', () => {
-    forgotPwPage.fillInTheNewPasswordFields(randomPwNew)
+    forgotPwPage.fillInTheNewPasswordFields(user.getNewPassword())
 })
 
 And('user clicks Submit button', () => {
@@ -109,4 +105,41 @@ And('login fields should be visible', () => {
     loginPage.elements.userEmailField().should('exist').and('be.visible')
     loginPage.elements.userPwField().should('exist').and('be.visible')
     loginPage.elements.loginButton().should('exist').and('be.visible')
+})
+
+// Journey task 2 [Login]
+
+And('user fills in the Email field with valid data', () => {
+    loginPage.fillTheLoginEmailField(user.getEmail())
+})
+
+And('user fills in the Password field with valid data',() => {
+    loginPage.fillTheLoginPasswordField(user.getNewPassword())
+})
+
+And('user fills in the Password field with old data',() => {
+    loginPage.fillTheLoginPasswordField(user.getOldPassword())
+})
+
+When('user click the Login button', () => {
+    loginPage.clickLoginButton()
+})
+
+And('user clicks the My account button', ()=>{
+    destroyRequestThatBlocksLoadEvent()
+    listingPage.openAccountPage()
+})
+
+Then('user is on My account page', () => {
+    cy.url().should('contain', '/kundenkonto')
+})
+
+And('static greeting text is visible', () => {
+    cy.get('.titleHeadline').should('be.visible').and('contain.text', `Hallo, ${user.getName()} ${user.getName()}`)
+})
+
+And('error message should appear stating {string}', (errorMessage) => {
+    loginPage.elements.errorOnLogin().should('exist')
+    loginPage.elements.errorOnPw().should('exist')
+    loginPage.elements.labelError().should('exist').and('have.text', errorMessage)
 })

@@ -1,4 +1,9 @@
+#misc
 node_modules
+downloads
+
+#reporting
+cucumber-json
+reports
 videos
 screenshots
-downloads

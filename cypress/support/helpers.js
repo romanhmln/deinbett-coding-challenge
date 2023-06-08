@@ -8,15 +8,11 @@ export function stringGen(len, purpose) {
   return purpose == 'name' ? text : text.concat("0!")
 }
 
-export function destroyRequestThatBlocksLoadEvent() {
-  cy.intercept({
-    method: 'POST',
-    url: `${Cypress.config().baseUrl}/api/article/hotspotsTiles`
-}, req => {
-    req.destroy();
-});
-}
-
 export function acceptCookies() {
   cy.get('[data-accept-action="selected"]').click()
 }
+
+export function getIntPrice(price) {
+  return parseFloat(price.match(/^\d{1,3}(?:\.\d{3})?(?:,\d{2})$/))
+}
+

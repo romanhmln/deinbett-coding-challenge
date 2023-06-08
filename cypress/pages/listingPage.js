@@ -1,21 +1,22 @@
-class listingPage {
+class ListingPage {
 
-    elements ={
+    elements = {
         searchBar: () => cy.get('#searchFieldInputId'),
         loginButton: () => cy.get('.headerElement--login'),
         myAccountPage: () => cy.get(".headerElement a[href='/kundenkonto']"),
         wishListButton: () => cy.get('.headerElement__link--wishlist'),
-        cartButton: () => cy.get('.headerElement__element--cart'),
+        cartButton: () => cy.get('.headerElement--cart'),
     }
 
-    visit(){
+    visit() {
         cy.visit("/")
     }
 
     search(data) {
-        this.elements.searchBar().type(data).type('{enter}')
+        cy.wait(1000).scrollTo('top')
+        this.elements.searchBar().clear().type(data).type('{enter}')
     }
-    
+
     openLoginPage() {
         this.elements.loginButton().click()
     }
@@ -26,11 +27,12 @@ class listingPage {
     }
 
     openWishList() {
-        this.elements.wishListButton().click
+        cy.wait(3000)
+        this.elements.wishListButton().click()
     }
 
     openCart() {
-        this.elements.cartButton().click
+        this.elements.cartButton().click()
     }
 }
-module.exports = new listingPage()
+module.exports = new ListingPage()

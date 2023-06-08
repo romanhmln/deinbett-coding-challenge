@@ -16,7 +16,7 @@ Feature: Registration feature to check personal data management for the website
         Then user shall see the Dein Konto header button
 
     Scenario: User forgot password flow
-        Given user is on the login page
+        Given user is on the Login page
         And user clicks on Forgot password link
         When user fills in Email field
         And user click Submit button
@@ -44,3 +44,52 @@ Feature: Registration feature to check personal data management for the website
         And user fills in the Password field with old data
         When user click the Login button
         Then error message should appear stating "Benutzername nicht gefunden oder Passwort falsch."
+
+     #Task 3 (a), (b), (c)
+
+    Scenario: User adds multiple items to the wishlist
+        Given user is on the Login page
+        And user fills in the Email field with valid data
+        And user fills in the Password field with valid data
+        And user click the Login button
+        When he adds 5 "products" to the wishlist
+        |products                          |
+        |Einzelbett Varese                 |
+        |Kaltschaummatratze Emma One       |
+        |Boxspring-Motorbett Carmen        |
+        |Boxspringbett mit Bettkasten Kosmo|
+        |Bettgestell Gloria                |
+        And user visits the wishlist
+        Then there are 5 items in the wishlist
+
+    Scenario: User adds items from the wishlist to the basket
+        Given user is on the Login page
+        And user fills in the Email field with valid data
+        And user fills in the Password field with valid data
+        And user click the Login button
+        And user visits the wishlist
+        And there are 5 items in the wishlist
+        And user fills in the plz value as '14193'
+        When user adds all the items to his basket
+        And user visits his basket
+        Then there are 5 items in the basket
+        And user can see all added items in the basket
+        |products                          |
+        |Einzelbett Varese                 |
+        |Kaltschaummatratze Emma One       |
+        |Boxspring-Motorbett Carmen        |
+        |Boxspringbett mit Bettkasten Kosmo|
+        |Bettgestell Gloria                |
+
+    Scenario: Check the basket merchandise value calculation
+        Given user is on the Login page
+        And user fills in the Email field with valid data
+        And user fills in the Password field with valid data
+        And user click the Login button
+        And user visits the wishlist
+        And there are 5 items in the wishlist
+        And user fills in the plz value as '14193'
+        When user adds all the items to his basket
+        And user visits his basket
+        Then there are 5 items in the basket
+        And merchandise value is equal to checkout sum excluding delivery and packaging

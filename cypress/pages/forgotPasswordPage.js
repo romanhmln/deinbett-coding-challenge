@@ -25,10 +25,7 @@ class forgotPasswordPage {
     submitNewPassword(){
         this.elements.forgotPwNewPasswordSubmitButton().click({force: true})
         cy.wait(5000)
-
     }
-
-    
 }
 
 module.exports = new forgotPasswordPage()

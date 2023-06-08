@@ -1,13 +1,24 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import { acceptCookies, destroyRequestThatBlocksLoadEvent, stringGen } from "../helpers";
-import listingPage from "../../pages/listingPage";
+import { acceptCookies } from "../helpers";
+
+const listingPage = require("../../pages/listingPage");
+const productListingPage = require('../../pages/productListingPage')
 const loginPage = require("../../pages/loginPage");
 const registrationPage = require("../../pages/registrationPage");
+const wishlistPage = require("../../pages/wishlistPage");
 const forgotPwPage = require("../../pages/forgotPasswordPage");
+const cartPage = require("../../pages/cartPage");
+
 const user = require('../containers/user.container')
+var parsePrice = require('parse-price')
+
 const serverId = Cypress.env('serverId')
 
 let forgotPwLink = null
+
+before(() => {
+    cy.clearCookies()
+})
 
 Given("user is on the Login page", () => {
     loginPage.visit()
@@ -51,13 +62,7 @@ And('user clicks the Submit button', () => {
 })
 
 Then('user shall see the Dein Konto header button', () => {
-    destroyRequestThatBlocksLoadEvent()
     listingPage.elements.myAccountPage().should('exist').and('be.visible')
-})
-
-Given('user is on the login page', () => {
-    loginPage.visit()
-    acceptCookies()
 })
 
 And('user clicks on Forgot password link', () => {
@@ -113,11 +118,11 @@ And('user fills in the Email field with valid data', () => {
     loginPage.fillTheLoginEmailField(user.getEmail())
 })
 
-And('user fills in the Password field with valid data',() => {
+And('user fills in the Password field with valid data', () => {
     loginPage.fillTheLoginPasswordField(user.getNewPassword())
 })
 
-And('user fills in the Password field with old data',() => {
+And('user fills in the Password field with old data', () => {
     loginPage.fillTheLoginPasswordField(user.getOldPassword())
 })
 
@@ -125,8 +130,7 @@ When('user click the Login button', () => {
     loginPage.clickLoginButton()
 })
 
-And('user clicks the My account button', ()=>{
-    destroyRequestThatBlocksLoadEvent()
+And('user clicks the My account button', () => {
     listingPage.openAccountPage()
 })
 
@@ -142,4 +146,56 @@ And('error message should appear stating {string}', (errorMessage) => {
     loginPage.elements.errorOnLogin().should('exist')
     loginPage.elements.errorOnPw().should('exist')
     loginPage.elements.labelError().should('exist').and('have.text', errorMessage)
+})
+
+// Journey task 3 [Shopping]
+
+When('he adds 5 "products" to the wishlist', table => {
+    table.hashes().forEach(row => {
+        listingPage.search(row.products)
+        productListingPage.addToWishList()
+    });
+})
+
+And('user visits the wishlist', () => {
+    listingPage.openWishList()
+})
+
+Then('there are {int} items in the wishlist', number => {
+    wishlistPage.countWishlistEntries(number)
+})
+
+And('user fills in the plz value as {string}', plz => {
+    wishlistPage.fillThePlz(plz)
+})
+
+When('user adds all the items to his basket', () => {
+    wishlistPage.addAllToCart()
+})
+
+And('user visits his basket', () => {
+    wishlistPage.toCart()
+})
+
+Then('there are {int} items in the basket', number => {
+    cartPage.verifyAmountOfItems(number)
+})
+
+Then('user can see all added items in the basket', table => {
+    table.hashes().forEach(row => {
+        cartPage.verifyItemIsInTheBasket(row.products)
+    })
+})
+
+And('merchandise value is equal to checkout sum excluding delivery and packaging', () => {
+    let sum = 0
+    cartPage.elements.cartEntryPrices().each($el =>
+        cy.wrap($el).invoke('text').then((text)=>{
+            sum += parsePrice(text)
+        })
+    ).then(()=>{
+        cartPage.elements.cartPrice().invoke('text').then((price)=>{
+            expect(sum).to.eql(parsePrice(price))
+        })
+    })
 })

@@ -11,17 +11,21 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
 
-    defaultCommandTimeout: 5000,
-    pageLoadTimeout: 15000,
+    defaultCommandTimeout: 15000,
+    pageLoadTimeout: 120000,
 
     chromeWebSecurity: false,
-    viewportHeight: 1080,
-    viewportWidth: 1920,
+    viewportHeight: 720,
+    viewportWidth: 1280,
 
     baseUrl: "https://www.deinbett.de",
 
     specPattern: ["**/*.feature"],
-
-    experimentalSessionAndOrigin: true
+    chromeWebSecurity: false,
+    experimentalSessionAndOrigin: true,
+    retries: {
+      runMode: 1,
+      openMode: 1
+    }
   },
 });

@@ -8,10 +8,6 @@ class ListingPage {
         cartButton: () => cy.get('.headerElement--cart'),
     }
 
-    visit() {
-        cy.visit("/")
-    }
-
     search(data) {
         cy.wait(1000).scrollTo('top')
         this.elements.searchBar().clear().type(data).type('{enter}')

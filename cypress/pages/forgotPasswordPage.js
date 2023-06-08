@@ -1,4 +1,4 @@
-class forgotPasswordPage {
+class ForgotPasswordPage {
 
     elements = {
         forgotPwEmailField: () => cy.get('#passwordForgottenEmail'),
@@ -28,4 +28,4 @@ class forgotPasswordPage {
     }
 }
 
-module.exports = new forgotPasswordPage()
+module.exports = new ForgotPasswordPage()

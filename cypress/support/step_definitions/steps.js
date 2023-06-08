@@ -12,8 +12,6 @@ const cartPage = require("../../pages/cartPage");
 const user = require('../containers/user.container')
 var parsePrice = require('parse-price')
 
-const serverId = Cypress.env('serverId')
-
 let forgotPwLink = null
 
 before(() => {
@@ -79,7 +77,7 @@ And('user click Submit button', () => {
 
 And('user retrieves the Email', () => {
     cy.wait(60000)
-    cy.mailosaurGetMessage(serverId, {
+    cy.mailosaurGetMessage(Cypress.env('serverId'), {
         sentTo: user.getEmail()
     }).then(email => {
         expect(email.subject).to.equal('Passwort zurücksetzen');

@@ -1,4 +1,4 @@
-class registrationPage {
+class RegistrationPage {
 
     elements = {
         salutationDropdown: () => cy.get('#salutation'),
@@ -52,4 +52,4 @@ class registrationPage {
     }
 }
 
-module.exports = new registrationPage()
+module.exports = new RegistrationPage()

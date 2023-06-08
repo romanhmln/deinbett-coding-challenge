@@ -1,4 +1,4 @@
-class loginPage {
+class LoginPage {
 
     elements = {
         registrationButton: () => cy.get('#registerAccount'),
@@ -40,4 +40,4 @@ class loginPage {
 
 }
 
-module.exports = new loginPage()
+module.exports = new LoginPage()

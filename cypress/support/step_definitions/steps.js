@@ -190,11 +190,11 @@ Then('user can see all added items in the basket', table => {
 And('merchandise value is equal to checkout sum excluding delivery and packaging', () => {
     let sum = 0
     cartPage.elements.cartEntryPrices().each($el =>
-        cy.wrap($el).invoke('text').then((text)=>{
+        cy.wrap($el).invoke('text').then((text) => {
             sum += parsePrice(text)
         })
-    ).then(()=>{
-        cartPage.elements.cartPrice().invoke('text').then((price)=>{
+    ).then(() => {
+        cartPage.elements.cartPrice().invoke('text').then((price) => {
             expect(sum).to.eql(parsePrice(price))
         })
     })

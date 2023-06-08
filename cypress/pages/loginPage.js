@@ -35,7 +35,7 @@ class loginPage {
     }
 
     clickLoginButton() {
-        this.elements.loginButton().click({force: true})
+        this.elements.loginButton().click({ force: true })
     }
 
 }

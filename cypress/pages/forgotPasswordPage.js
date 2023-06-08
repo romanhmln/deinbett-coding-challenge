@@ -2,13 +2,13 @@ class forgotPasswordPage {
 
     elements = {
         forgotPwEmailField: () => cy.get('#passwordForgottenEmail'),
-        forgotPwSubmitButton: ()  => cy.get('#passwordForgottenSubmitId'),
-        forgotPwNewPasswordField: () => cy.get('#newPassword'),   
+        forgotPwSubmitButton: () => cy.get('#passwordForgottenSubmitId'),
+        forgotPwNewPasswordField: () => cy.get('#newPassword'),
         forgotPwNewPasswordRepeatField: () => cy.get('#newPasswordRepeat'),
-        forgotPwNewPasswordSubmitButton: () => cy.get('#passwordNewSubmit')  
+        forgotPwNewPasswordSubmitButton: () => cy.get('#passwordNewSubmit')
     }
 
-    fillInTheEmailField(email){
+    fillInTheEmailField(email) {
         this.elements.forgotPwEmailField().clear().type(email)
         this.elements.forgotPwEmailField().should('have.value', email)
     }
@@ -17,13 +17,13 @@ class forgotPasswordPage {
         this.elements.forgotPwSubmitButton().click()
     }
 
-    fillInTheNewPasswordFields(password){
+    fillInTheNewPasswordFields(password) {
         this.elements.forgotPwNewPasswordField().clear().type(password)
         this.elements.forgotPwNewPasswordRepeatField().clear().type(password)
     }
 
-    submitNewPassword(){
-        this.elements.forgotPwNewPasswordSubmitButton().click({force: true})
+    submitNewPassword() {
+        this.elements.forgotPwNewPasswordSubmitButton().click({ force: true })
         cy.wait(5000)
     }
 }

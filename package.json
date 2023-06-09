@@ -27,9 +27,7 @@
       "outputFolder": "cypress/cucumber-json",
       "filePrefix": "",
       "fileSuffix": ".cucumber"
-    }
-  },
-  "dependencies": {
+    },
     "parse-price": "^1.1.8"
   }
 }

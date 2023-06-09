@@ -13,4 +13,5 @@ report.generate({
             version: "Ventura",
         },
     },
+    openReportInBrowser: true
 });

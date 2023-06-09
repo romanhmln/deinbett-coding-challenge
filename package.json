@@ -4,8 +4,7 @@
   "description": "Coding challenge for Krieger Digital",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open",
-    "cypress-run": "cypress run"
+    "test": "cypress open"
   },
   "repository": {
     "type": "git",

@@ -36,7 +36,19 @@ To generate a report consider using:
 node cucumber-html-report.js
 ```
 
-No further actions required.
+The report will be available under `/root/reports/cucumber-html_report.html/index.html`
+Videos and screenshots of failed tests by Cypress will be available under `/cypress/videos` and `/cypress/screenshots` respectively.
+
+## Docker
+
+This test framework can be executed through Docker container.
+To do so, please consider using the next command:
+
+```bash
+./runtests.sh
+```
+Process is fully automated. Cleanup applied.
+After test execution, the report will be available under `/root/tests.zip`.
 
 ## License
 

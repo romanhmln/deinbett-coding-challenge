@@ -25,6 +25,8 @@ npx cypress run --env MAILOSAUR_API_KEY=<api_key>,serverId=<serverId>,subdomain=
 
 `subdomain` is used to filter the messages that are coming to server and provides security
 
+For local usage, keys and secrets will be emailed with this repository.
+
 ## Reporting
 
 This project is using `multiple-cucumber-html-reporter` to provide visual representation of the test run results. This library will generate HTML report on demand after the test execution phase and open it in the default OS browser.

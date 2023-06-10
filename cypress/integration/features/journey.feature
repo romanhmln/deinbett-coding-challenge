@@ -20,7 +20,6 @@ Feature: Registration feature to check personal data management for the website
         And user clicks on Forgot password link
         When user fills in Email field
         And user click Submit button
-        And user retrieves the Email
         And user clicks on the link in the email
         And user fills in New password and Confirm password fields
         And user clicks Submit button

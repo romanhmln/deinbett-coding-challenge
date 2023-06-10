@@ -1,3 +1,6 @@
+export const TIMEOUT_HANG_ACTION = 3000;
+export const TIMEOUT_EMAIL = 60000;
+
 export function stringGen(len, purpose) {
   let text = "";
 
@@ -6,13 +9,5 @@ export function stringGen(len, purpose) {
     text += charset.charAt(Math.floor(Math.random() * charset.length));
 
   return purpose == 'name' ? text : text.concat("0!")
-}
-
-export function acceptCookies() {
-  cy.get('[data-accept-action="selected"]').click()
-}
-
-export function getIntPrice(price) {
-  return parseFloat(price.match(/^\d{1,3}(?:\.\d{3})?(?:,\d{2})$/))
 }
 

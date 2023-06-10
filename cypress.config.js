@@ -8,7 +8,7 @@ module.exports = defineConfig({
 
     defaultCommandTimeout: 15000,
     pageLoadTimeout: 120000,
-
+    supportFile: 'cypress/support/e2e.js',
     chromeWebSecurity: false,
     viewportHeight: 720,
     viewportWidth: 1280,

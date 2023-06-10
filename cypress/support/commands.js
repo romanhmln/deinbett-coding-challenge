@@ -24,3 +24,20 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-mailosaur'
+
+import { TIMEOUT_EMAIL } from './helpers';
+
+Cypress.Commands.add('getTheResetPasswordLink', (user) => {
+    cy.wait(TIMEOUT_EMAIL).mailosaurGetMessage(Cypress.env('serverId'), {
+        sentTo: user.getEmail()
+    }).then(email => {
+        expect(email.subject).to.equal('Passwort zurücksetzen');
+        cy.wrap(email.html.links[4].href).then(links => {
+            cy.visit(links);
+        })
+    })
+})
+
+Cypress.Commands.add("acceptCookies", () => {
+    cy.get('[data-accept-action="selected"]').click()
+})

@@ -1,5 +1,4 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import { acceptCookies } from "../helpers";
 
 const listingPage = require("../../pages/listingPage");
 const productListingPage = require('../../pages/productListingPage')
@@ -20,7 +19,7 @@ before(() => {
 
 Given("user is on the Login page", () => {
     loginPage.visit()
-    acceptCookies()
+    cy.acceptCookies()
 })
 
 When('user clicks Register button', () => {
@@ -75,18 +74,8 @@ And('user click Submit button', () => {
     forgotPwPage.clickTheSubmitButton()
 })
 
-And('user retrieves the Email', () => {
-    cy.wait(60000)
-    cy.mailosaurGetMessage(Cypress.env('serverId'), {
-        sentTo: user.getEmail()
-    }).then(email => {
-        expect(email.subject).to.equal('Passwort zurücksetzen');
-        forgotPwLink = email.html.links[4].href;
-    })
-})
-
 And('user clicks on the link in the email', () => {
-    cy.visit(forgotPwLink)
+    cy.getTheResetPasswordLink(user)
     forgotPwPage.elements.forgotPwNewPasswordField().should('exist').and('be.visible')
 })
 

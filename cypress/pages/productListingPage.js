@@ -1,4 +1,4 @@
-class ProductListingpage {
+class ProductListingPage {
 
     elements = {
         productTile: () => cy.get('.articleTileV2'),
@@ -15,4 +15,4 @@ class ProductListingpage {
     }
 }
 
-module.exports = new ProductListingpage()
+module.exports = new ProductListingPage()

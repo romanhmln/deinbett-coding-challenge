@@ -1,3 +1,5 @@
+const { TIMEOUT_HANG_ACTION } = require("../support/helpers")
+
 class ForgotPasswordPage {
 
     elements = {
@@ -24,7 +26,7 @@ class ForgotPasswordPage {
 
     submitNewPassword() {
         this.elements.forgotPwNewPasswordSubmitButton().click({ force: true })
-        cy.wait(5000)
+        cy.wait(TIMEOUT_HANG_ACTION)
     }
 }
 

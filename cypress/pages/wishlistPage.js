@@ -1,3 +1,5 @@
+const { TIMEOUT_HANG_ACTION } = require("../support/helpers")
+
 class WishListPage {
 
     elements = {
@@ -24,7 +26,7 @@ class WishListPage {
     }
 
     addAllToCart() {
-        this.elements.wishlistAddAllToCartButton().click().wait(5000)
+        this.elements.wishlistAddAllToCartButton().click().wait(TIMEOUT_HANG_ACTION)
     }
 
     deleteItem() {

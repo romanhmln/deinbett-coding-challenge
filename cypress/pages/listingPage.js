@@ -1,3 +1,5 @@
+const { TIMEOUT_HANG_ACTION } = require("../support/helpers")
+
 class ListingPage {
 
     elements = {
@@ -9,7 +11,7 @@ class ListingPage {
     }
 
     search(data) {
-        cy.wait(1000).scrollTo('top')
+        cy.wait(TIMEOUT_HANG_ACTION).scrollTo('top')
         this.elements.searchBar().clear().type(data).type('{enter}')
     }
 
@@ -23,8 +25,8 @@ class ListingPage {
     }
 
     openWishList() {
-        cy.wait(3000)
-        this.elements.wishListButton().click()
+        cy.wait(TIMEOUT_HANG_ACTION).scrollTo('top')
+        this.elements.wishListButton().click({timeout: 10000})
     }
 
     openCart() {

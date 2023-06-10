@@ -17,7 +17,8 @@
     "cypress": "^11.0.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-mailosaur": "^2.13.0",
-    "multiple-cucumber-html-reporter": "^3.4.0"
+    "multiple-cucumber-html-reporter": "^3.4.0",
+    "parse-price": "^1.1.8"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
@@ -26,7 +27,6 @@
       "outputFolder": "cypress/cucumber-json",
       "filePrefix": "",
       "fileSuffix": ".cucumber"
-    },
-    "parse-price": "^1.1.8"
+    }
   }
 }
